@@ -170,11 +170,6 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.meta-small {
-    font-size: 0.93rem;
-    color: #6b7280;
-    margin-bottom: 2px;
-}
 .project-meta {
     display: flex;
     flex-wrap: wrap;
@@ -246,10 +241,37 @@ body {
     text-decoration: none;
     transition: background 0.2s, color 0.2s;
     min-width: 0;
+    width: auto;
+    max-width: none;
+    align-self: flex-start;
+}
+.slack-badge-row {
+    display: block;
+    width: auto;
+    margin-top: 2px;
 }
 .badge.slack-badge:hover {
     background: #611f69;
     color: #fff;
+}
+.badge.owner-badge {
+    border: 2.5px solid #ff9900;
+    background: #fff7e0;
+    color: #232f3e;
+    font-weight: 700;
+    margin-right: 6px;
+}
+.badge.owner-badge:hover {
+    background: #ff9900;
+    color: #fff;
+    border-color: #ff9900;
+}
+.project-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 2px;
+    margin-top: 2px;
 }
 .slack-logo {
     display: inline-flex;
@@ -473,20 +495,4 @@ footer {
         padding: 12px 2vw;
         font-size: 1rem;
     }
-}
-
-.project-slack-row {
-    margin-top: 4px;
-    color: #146eb4;
-    font-size: 0.97rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.project-slack-row .slack-icon {
-    font-size: 1.1em;
-    color: #611f69;
 }

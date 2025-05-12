@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'project-card';
 
-            // Header: status badge only
+            // Header: status badge + tag badges
             const header = document.createElement('div');
             header.className = 'project-card-header';
 
@@ -22,23 +22,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 status.style.color = '#b38600';
                 status.style.border = '1.5px solid #b38600';
             }
+            status.style.cursor = 'pointer';
+            status.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Only select this status in the filter panel
+                const statusCheckboxes = document.querySelectorAll('#status-checkboxes input[type=checkbox]');
+                let alreadyOnly = true;
+                statusCheckboxes.forEach(cb => {
+                    if (cb.value === project.contribution_status) {
+                        if (!cb.checked) alreadyOnly = false;
+                    } else {
+                        if (cb.checked) alreadyOnly = false;
+                    }
+                });
+                if (alreadyOnly) return;
+                statusCheckboxes.forEach(cb => {
+                    cb.checked = (cb.value === project.contribution_status);
+                });
+                filterAndRender();
+            });
             header.appendChild(status);
-            card.appendChild(header);
 
-            // Title
-            const title = document.createElement('h3');
-            title.textContent = project.title;
-            card.appendChild(title);
-
-            // Description (larger font)
-            const desc = document.createElement('p');
-            desc.className = 'project-desc large-desc';
-            desc.textContent = project.description;
-            card.appendChild(desc);
-
-            // Tags (below description)
-            const tagsRow = document.createElement('div');
-            tagsRow.className = 'project-tags-row';
+            // Tag badges (now in header row)
             project.tags.forEach(tag => {
                 const tagBadge = document.createElement('span');
                 tagBadge.className = 'badge tag';
@@ -62,12 +67,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     filterAndRender();
                 });
-                tagsRow.appendChild(tagBadge);
+                header.appendChild(tagBadge);
             });
-            card.appendChild(tagsRow);
+            card.appendChild(header);
+
+            // Title
+            const title = document.createElement('h3');
+            title.textContent = project.title;
+            card.appendChild(title);
+
+            // Description (larger font)
+            const desc = document.createElement('p');
+            desc.className = 'project-desc large-desc';
+            desc.textContent = project.description;
+            card.appendChild(desc);
 
             // Slack channel badge below tags
             if (project.slack_channel) {
+                const slackRow = document.createElement('div');
+                slackRow.className = 'slack-badge-row';
                 const slackLink = document.createElement('a');
                 slackLink.className = 'badge slack-badge';
                 slackLink.href = project.slack_channel_url || '#';
@@ -77,40 +95,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 slackLink.innerHTML = `<span class="slack-logo" style="vertical-align:middle;margin-right:6px;">` +
                     `<svg width="16" height="16" viewBox="0 0 122.8 122.8" style="vertical-align:middle;" xmlns="http://www.w3.org/2000/svg"><g><path fill="#611f69" d="M30.3 77.2c0 8.4-6.8 15.2-15.2 15.2S0 85.6 0 77.2s6.8-15.2 15.2-15.2h15.1v15.2zm7.6 0c0-8.4 6.8-15.2 15.2-15.2s15.2 6.8 15.2 15.2v38.1c0 8.4-6.8 15.2-15.2 15.2s-15.2-6.8-15.2-15.2V77.2z"/><path fill="#36c5f0" d="M45.5 30.3c-8.4 0-15.2-6.8-15.2-15.2S37.1 0 45.5 0s15.2 6.8 15.2 15.2v15.1H45.5zm0 7.6c8.4 0 15.2 6.8 15.2 15.2s-6.8 15.2-15.2 15.2H7.4C-1 68.3-1 61.5 7.4 61.5h38.1z"/><path fill="#2eb67d" d="M92.5 45.5c0-8.4 6.8-15.2 15.2-15.2s15.2 6.8 15.2 15.2-6.8 15.2-15.2 15.2H92.5V45.5zm-7.6 0c0 8.4-6.8 15.2-15.2 15.2s-15.2-6.8-15.2-15.2V7.4C54.5-1 61.3-1 69.7 7.4v38.1z"/><path fill="#ecb22e" d="M77.2 92.5c8.4 0 15.2 6.8 15.2 15.2s-6.8 15.2-15.2 15.2-15.2-6.8-15.2-15.2v-15.1h15.2zm0-7.6c-8.4 0-15.2-6.8-15.2-15.2s6.8-15.2 15.2-15.2h38.1c8.4 0 8.4 6.8 0 15.2H77.2z"/></g></svg></span>` +
                     `<span class="slack-channel-text">${project.slack_channel}</span>`;
-                card.appendChild(slackLink);
+                slackRow.appendChild(slackLink);
+                card.appendChild(slackRow);
             }
 
-            // Owner (own line, small)
-            const ownerRow = document.createElement('div');
-            ownerRow.className = 'project-meta meta-small';
-            const ownerLabel = document.createElement('span');
-            ownerLabel.className = 'meta-label';
-            ownerLabel.textContent = 'Owner:';
-            ownerRow.appendChild(ownerLabel);
+            // Owner and contributors in a single row of badges
+            const metaRow = document.createElement('div');
+            metaRow.className = 'project-meta-row';
+            // Owner badge
             const owner = document.createElement('a');
-            owner.className = 'badge user-badge';
+            owner.className = 'badge owner-badge';
             owner.href = project.owner.url;
             owner.textContent = project.owner.name;
-            ownerRow.appendChild(owner);
-            card.appendChild(ownerRow);
-
-            // Contributors (own line, small)
+            metaRow.appendChild(owner);
+            // Contributor badges
             if (project.contributors && project.contributors.length > 0) {
-                const contribRow = document.createElement('div');
-                contribRow.className = 'project-meta meta-small';
-                const contribLabel = document.createElement('span');
-                contribLabel.className = 'meta-label';
-                contribLabel.textContent = 'Contributors:';
-                contribRow.appendChild(contribLabel);
                 project.contributors.forEach(contrib => {
                     const contribA = document.createElement('a');
                     contribA.className = 'badge user-badge';
                     contribA.href = contrib.url;
                     contribA.textContent = contrib.name;
-                    contribRow.appendChild(contribA);
+                    metaRow.appendChild(contribA);
                 });
-                card.appendChild(contribRow);
             }
+            card.appendChild(metaRow);
 
             grid.appendChild(card);
         });
