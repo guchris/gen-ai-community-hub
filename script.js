@@ -43,6 +43,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 const tagBadge = document.createElement('span');
                 tagBadge.className = 'badge tag';
                 tagBadge.textContent = tag;
+                tagBadge.style.cursor = 'pointer';
+                tagBadge.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Only select this tag in the filter panel
+                    const tagCheckboxes = document.querySelectorAll('#tag-checkboxes input[type=checkbox]');
+                    let alreadyOnly = true;
+                    tagCheckboxes.forEach(cb => {
+                        if (cb.value === tag) {
+                            if (!cb.checked) alreadyOnly = false;
+                        } else {
+                            if (cb.checked) alreadyOnly = false;
+                        }
+                    });
+                    if (alreadyOnly) return;
+                    tagCheckboxes.forEach(cb => {
+                        cb.checked = (cb.value === tag);
+                    });
+                    filterAndRender();
+                });
                 tagsRow.appendChild(tagBadge);
             });
             card.appendChild(tagsRow);
