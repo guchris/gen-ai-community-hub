@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenAI Community Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-left">GenAI Community Hub</div>
+        <ul class="nav-right">
+            <li class="active"><a href="#projects">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+    <div style="height: 32px;"></div>
+    <main class="main-flex">
+        <aside id="filter-panel">
+            <div class="filter-section">
+                <div class="filter-title"><span class="collapse-icon">▼</span>Contribution Status</div>
+                <div id="status-checkboxes"></div>
+            </div>
+            <div class="filter-section collapsed">
+                <div class="filter-title"><span class="collapse-icon">▼</span>Tags</div>
+                <div id="tag-checkboxes"></div>
+            </div>
+        </aside>
+        <section id="main-content">
+            <div class="info-header-alert vertical">
+                <span class="info-title">GenAI Community Hub</span>
+                <span class="info-body">Browse and discover strategic GenAI developer tools. Use the filters and search to find projects to contribute to or learn from.</span>
+            </div>
+            <div class="projects-header">
+                <input type="text" id="search" placeholder="Search Projects..." />
+            </div>
+            <div class="projects-grid">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Made by @gchrisy from ASBX</p>
+    </footer>
+</body>
+</html>

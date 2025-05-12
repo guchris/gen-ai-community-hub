@@ -1,0 +1,65 @@
+[
+  {
+    "title": "GenAI Requirements Clarifier",
+    "description": "A GenAI-powered assistant that helps product managers and developers clarify, refine, and validate software requirements. It analyzes user stories, detects ambiguities, and suggests improvements, ensuring a solid foundation for development.",
+    "owner": { "name": "@pmclarity", "url": "#" },
+    "contributors": [
+      { "name": "@uxwriter", "url": "#" },
+      { "name": "@requirementsbot", "url": "#" }
+    ],
+    "contribution_status": "open",
+    "tags": ["Requirements", "SDLC", "Analysis"]
+  },
+  {
+    "title": "GenAI Architecture Explorer",
+    "description": "This tool leverages GenAI to generate, visualize, and compare architectural diagrams and patterns based on project requirements. It recommends best practices and highlights potential risks in your system design.",
+    "owner": { "name": "@archgenius", "url": "#" },
+    "contributors": [
+      { "name": "@cloudguru", "url": "#" }
+    ],
+    "contribution_status": "in progress",
+    "tags": ["Architecture", "Design", "Visualization"]
+  },
+  {
+    "title": "GenAI Code Generator & Reviewer",
+    "description": "Accelerate development with GenAI-driven code generation for common patterns, boilerplate, and APIs. The tool also reviews pull requests, flags anti-patterns, and suggests improvements, supporting both implementation and code review stages.",
+    "owner": { "name": "@devwizard", "url": "#" },
+    "contributors": [
+      { "name": "@reviewbot", "url": "#" },
+      { "name": "@patternsmith", "url": "#" }
+    ],
+    "contribution_status": "open",
+    "tags": ["Implementation", "Code Review", "Automation"]
+  },
+  {
+    "title": "GenAI Test Suite Synthesizer",
+    "description": "Automatically generate comprehensive unit, integration, and end-to-end tests using GenAI. The tool analyzes code changes and requirements to suggest and create relevant test cases, reducing manual effort and increasing coverage.",
+    "owner": { "name": "@testpilot", "url": "#" },
+    "contributors": [
+      { "name": "@qaengineer", "url": "#" }
+    ],
+    "contribution_status": "in progress",
+    "tags": ["Testing", "QA", "Automation"]
+  },
+  {
+    "title": "GenAI Deployment Optimizer",
+    "description": "A GenAI-driven tool that recommends optimal deployment strategies, generates infrastructure-as-code templates, and predicts potential bottlenecks. It supports blue/green, canary, and rolling deployments for cloud-native applications.",
+    "owner": { "name": "@devopslead", "url": "#" },
+    "contributors": [
+      { "name": "@cloudops", "url": "#" },
+      { "name": "@infraai", "url": "#" }
+    ],
+    "contribution_status": "open",
+    "tags": ["Deployment", "DevOps", "Cloud"]
+  },
+  {
+    "title": "GenAI Incident Analyzer",
+    "description": "Empower your operations team with GenAI-powered incident analysis. The tool correlates logs, metrics, and traces to detect root causes, suggests remediation steps, and generates post-incident reports for continuous improvement.",
+    "owner": { "name": "@srehero", "url": "#" },
+    "contributors": [
+      { "name": "@opsbot", "url": "#" }
+    ],
+    "contribution_status": "closed",
+    "tags": ["Operations", "Monitoring", "Incident Response"]
+  }
+] 
