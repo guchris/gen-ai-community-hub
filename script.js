@@ -66,6 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             card.appendChild(tagsRow);
 
+            // Slack channel badge below tags
+            if (project.slack_channel) {
+                const slackLink = document.createElement('a');
+                slackLink.className = 'badge slack-badge';
+                slackLink.href = project.slack_channel_url || '#';
+                slackLink.target = '_blank';
+                slackLink.rel = 'noopener noreferrer';
+                // Slack logo SVG (accessible, small)
+                slackLink.innerHTML = `<span class="slack-logo" style="vertical-align:middle;margin-right:6px;">` +
+                    `<svg width="16" height="16" viewBox="0 0 122.8 122.8" style="vertical-align:middle;" xmlns="http://www.w3.org/2000/svg"><g><path fill="#611f69" d="M30.3 77.2c0 8.4-6.8 15.2-15.2 15.2S0 85.6 0 77.2s6.8-15.2 15.2-15.2h15.1v15.2zm7.6 0c0-8.4 6.8-15.2 15.2-15.2s15.2 6.8 15.2 15.2v38.1c0 8.4-6.8 15.2-15.2 15.2s-15.2-6.8-15.2-15.2V77.2z"/><path fill="#36c5f0" d="M45.5 30.3c-8.4 0-15.2-6.8-15.2-15.2S37.1 0 45.5 0s15.2 6.8 15.2 15.2v15.1H45.5zm0 7.6c8.4 0 15.2 6.8 15.2 15.2s-6.8 15.2-15.2 15.2H7.4C-1 68.3-1 61.5 7.4 61.5h38.1z"/><path fill="#2eb67d" d="M92.5 45.5c0-8.4 6.8-15.2 15.2-15.2s15.2 6.8 15.2 15.2-6.8 15.2-15.2 15.2H92.5V45.5zm-7.6 0c0 8.4-6.8 15.2-15.2 15.2s-15.2-6.8-15.2-15.2V7.4C54.5-1 61.3-1 69.7 7.4v38.1z"/><path fill="#ecb22e" d="M77.2 92.5c8.4 0 15.2 6.8 15.2 15.2s-6.8 15.2-15.2 15.2-15.2-6.8-15.2-15.2v-15.1h15.2zm0-7.6c-8.4 0-15.2-6.8-15.2-15.2s6.8-15.2 15.2-15.2h38.1c8.4 0 8.4 6.8 0 15.2H77.2z"/></g></svg></span>` +
+                    `<span class="slack-channel-text">${project.slack_channel}</span>`;
+                card.appendChild(slackLink);
+            }
+
             // Owner (own line, small)
             const ownerRow = document.createElement('div');
             ownerRow.className = 'project-meta meta-small';
